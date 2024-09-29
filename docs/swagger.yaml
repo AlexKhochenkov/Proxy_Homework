@@ -1,0 +1,162 @@
+basePath: /
+definitions:
+  models.ParsedRequest:
+    properties:
+      cookies:
+        additionalProperties:
+          type: string
+        type: object
+      get_params:
+        additionalProperties:
+          type: string
+        type: object
+      headers:
+        additionalProperties:
+          type: string
+        type: object
+      method:
+        type: string
+      path:
+        type: string
+      post_params:
+        additionalProperties:
+          type: string
+        type: object
+    type: object
+  models.ParsedResponse:
+    properties:
+      body:
+        type: string
+      code:
+        type: integer
+      headers:
+        additionalProperties:
+          type: string
+        type: object
+      message:
+        type: string
+    type: object
+  models.RequestResponse:
+    properties:
+      createdAt:
+        type: string
+      id:
+        type: string
+      request:
+        $ref: '#/definitions/models.ParsedRequest'
+      response:
+        $ref: '#/definitions/models.ParsedResponse'
+    type: object
+host: localhost:8000
+info:
+  contact: {}
+  description: API server for Proxy
+  title: API Proxy
+  version: "1.0"
+paths:
+  /api/v1/repeat/{id}:
+    post:
+      description: Повторно отправляет запрос, сохраненный по его ID, и возвращает
+        результат
+      parameters:
+      - description: Request ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ParsedResponse'
+        "400":
+          description: Invalid request ID
+          schema:
+            type: string
+        "404":
+          description: Request not found
+          schema:
+            type: string
+        "500":
+          description: Failed to repeat request
+          schema:
+            type: string
+      summary: Repeat a request by ID
+      tags:
+      - requests
+  /api/v1/requests:
+    get:
+      description: Возвращает список всех запросов, сохраненных в базе данных
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.RequestResponse'
+            type: array
+        "500":
+          description: Failed to fetch requests
+          schema:
+            type: string
+      summary: Get all requests
+      tags:
+      - requests
+  /api/v1/requests/{id}:
+    get:
+      description: Возвращает конкретный запрос по его ID
+      parameters:
+      - description: Request ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.RequestResponse'
+        "400":
+          description: Invalid request ID
+          schema:
+            type: string
+        "404":
+          description: Request not found
+          schema:
+            type: string
+      summary: Get request by ID
+      tags:
+      - requests
+  /api/v1/scan/{id}:
+    get:
+      description: Сканирует с применением Param-miner
+      parameters:
+      - description: Request ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.RequestResponse'
+        "400":
+          description: Invalid request ID
+          schema:
+            type: string
+        "404":
+          description: Request not found
+          schema:
+            type: string
+      summary: Scan request by ID
+      tags:
+      - requests
+swagger: "2.0"
