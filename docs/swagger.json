@@ -1,8 +1,8 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "API server for Proxy",
-        "title": "API Proxy",
+        "description": "API server for proxy",
+        "title": "Proxy2024",
         "contact": {},
         "version": "1.0"
     },
@@ -11,7 +11,7 @@
     "paths": {
         "/api/v1/repeat/{id}": {
             "post": {
-                "description": "Повторно отправляет запрос, сохраненный по его ID, и возвращает результат",
+                "description": "Повторно отправляет запрос с помощью его ID",
                 "produces": [
                     "application/json"
                 ],
@@ -87,7 +87,7 @@
         },
         "/api/v1/requests/{id}": {
             "get": {
-                "description": "Возвращает конкретный запрос по его ID",
+                "description": "Находит запрос по ID",
                 "produces": [
                     "application/json"
                 ],
@@ -128,7 +128,7 @@
         },
         "/api/v1/scan/{id}": {
             "get": {
-                "description": "Сканирует с применением Param-miner",
+                "description": "Проверяет запрос по его ID на уязвимости Param-miner",
                 "produces": [
                     "application/json"
                 ],

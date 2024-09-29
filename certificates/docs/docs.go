@@ -23,7 +23,7 @@ var SwaggerInfo = &swag.Spec{
 	Host:             "localhost:8000",
 	BasePath:         "/",
 	Schemes:          []string{},
-	Title:            "API Proxy",
+	Title:            "Proxy2024",
 	Description:      "API server for proxy",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,

@@ -112,33 +112,33 @@ func (h *Handler) HandleRepeatRequest(w http.ResponseWriter, r *http.Request) {
 }
 
 func sendRequest(request *models.RequestResponse) (string, error) {
-	var curlCommand bytes.Buffer
+	var requestCurl bytes.Buffer
 
-	curlCommand.WriteString("curl -x http://127.0.0.1:8080 ")
+	requestCurl.WriteString("curl -x http://127.0.0.1:8080 ")
 	if request.Request.Method != "CONNECT" {
-		curlCommand.WriteString("-X ")
-		curlCommand.WriteString(request.Request.Method)
+		requestCurl.WriteString("-X ")
+		requestCurl.WriteString(request.Request.Method)
 	}
 
 	for key, value := range request.Request.GetParams {
-		curlCommand.WriteString(fmt.Sprintf(" -G --data-urlencode \"%s=%s\"", key, value))
+		requestCurl.WriteString(fmt.Sprintf(" -G --data-urlencode \"%s=%s\"", key, value))
 	}
 
 	for key, value := range request.Request.PostParams {
-		curlCommand.WriteString(fmt.Sprintf(" -d \"%s=%s\"", key, value))
+		requestCurl.WriteString(fmt.Sprintf(" -d \"%s=%s\"", key, value))
 	}
 
 	for key, value := range request.Request.Headers {
-		curlCommand.WriteString(fmt.Sprintf(" -H \"%s: %s\"", key, value))
+		requestCurl.WriteString(fmt.Sprintf(" -H \"%s: %s\"", key, value))
 	}
 
 	for key, value := range request.Request.Cookies {
-		curlCommand.WriteString(fmt.Sprintf(" --cookie \"%s=%s\"", key, value))
+		requestCurl.WriteString(fmt.Sprintf(" --cookie \"%s=%s\"", key, value))
 	}
 
-	curlCommand.WriteString(" " + request.Request.Path)
+	requestCurl.WriteString(" " + request.Request.Path)
 
-	s := curlCommand.String()
+	s := requestCurl.String()
 	cmd := exec.Command("bash", "-c", s)
 	out, err := cmd.CombinedOutput()
 	if err != nil {
@@ -222,7 +222,7 @@ func modifyRequest(request *models.RequestResponse, param string) (*models.Reque
 func checkParamMiner(request *models.RequestResponse) ([]string, error) {
 	var results []string
 	var getParams []string
-	getParams, err := ReadParams("params.txt")
+	getParams, err := ReadParams("pkg/api/http/params.txt")
 	if err != nil {
 		return []string{""}, fmt.Errorf("Ошибка при считывании параметров: %v", err)
 	}

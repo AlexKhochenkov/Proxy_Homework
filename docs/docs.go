@@ -17,7 +17,7 @@ const docTemplate = `{
     "paths": {
         "/api/v1/repeat/{id}": {
             "post": {
-                "description": "Повторно отправляет запрос, сохраненный по его ID, и возвращает результат",
+                "description": "Повторно отправляет запрос с помощью его ID",
                 "produces": [
                     "application/json"
                 ],
@@ -93,7 +93,7 @@ const docTemplate = `{
         },
         "/api/v1/requests/{id}": {
             "get": {
-                "description": "Возвращает конкретный запрос по его ID",
+                "description": "Находит запрос по ID",
                 "produces": [
                     "application/json"
                 ],
@@ -256,8 +256,8 @@ var SwaggerInfo = &swag.Spec{
 	Host:             "localhost:8000",
 	BasePath:         "/",
 	Schemes:          []string{},
-	Title:            "API Proxy",
-	Description:      "API server for Proxy",
+	Title:            "Proxy2024",
+	Description:      "API server for proxy",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

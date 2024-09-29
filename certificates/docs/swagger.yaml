@@ -3,7 +3,7 @@ host: localhost:8000
 info:
   contact: {}
   description: API server for proxy
-  title: API Proxy
+  title: Proxy2024
   version: "1.0"
 paths: {}
 swagger: "2.0"

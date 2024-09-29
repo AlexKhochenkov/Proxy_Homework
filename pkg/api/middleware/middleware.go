@@ -12,6 +12,6 @@ func RequestLogger(next http.Handler) http.Handler {
 
 		next.ServeHTTP(w, r)
 
-		log.Printf("Request: %s %s took %v", r.Method, r.URL.Path, time.Since(start))
+		log.Printf("Запрос: %s %s ; Время: %v", r.Method, r.URL.Path, time.Since(start))
 	})
 }

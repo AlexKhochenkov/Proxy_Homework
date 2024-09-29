@@ -2,7 +2,7 @@
     "swagger": "2.0",
     "info": {
         "description": "API server for proxy",
-        "title": "API Proxy",
+        "title": "Proxy2024",
         "contact": {},
         "version": "1.0"
     },

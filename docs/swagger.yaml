@@ -50,14 +50,13 @@ definitions:
 host: localhost:8000
 info:
   contact: {}
-  description: API server for Proxy
-  title: API Proxy
+  description: API server for proxy
+  title: Proxy2024
   version: "1.0"
 paths:
   /api/v1/repeat/{id}:
     post:
-      description: Повторно отправляет запрос, сохраненный по его ID, и возвращает
-        результат
+      description: Повторно отправляет запрос с помощью его ID
       parameters:
       - description: Request ID
         in: path
@@ -107,7 +106,7 @@ paths:
       - requests
   /api/v1/requests/{id}:
     get:
-      description: Возвращает конкретный запрос по его ID
+      description: Находит запрос по ID
       parameters:
       - description: Request ID
         in: path
@@ -134,7 +133,7 @@ paths:
       - requests
   /api/v1/scan/{id}:
     get:
-      description: Сканирует с применением Param-miner
+      description: Проверяет запрос по его ID на уязвимости Param-miner
       parameters:
       - description: Request ID
         in: path
