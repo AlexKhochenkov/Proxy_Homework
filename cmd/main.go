@@ -24,7 +24,7 @@ import (
 	_ "Proxy/docs"
 )
 
-// @title API Proxy
+// @title Proxy2024
 // @version 1.0
 // @description API server for proxy
 
@@ -34,7 +34,7 @@ func main() {
 	client, collection := initializeDatabase()
 	defer func() {
 		if err := client.Disconnect(context.Background()); err != nil {
-			log.Fatalf("Error disconnecting MongoDB: %v", err)
+			log.Fatalf("Отключен от MongoDB: %v", err)
 		}
 	}()
 
@@ -50,15 +50,15 @@ func initializeDatabase() (*mongo.Client, *mongo.Collection) {
 
 	client, err := mongo.Connect(ctx, clientOptions)
 	if err != nil {
-		log.Fatalf("Failed to connect to MongoDB: %v", err)
+		log.Fatalf("Не смог подключиться к MongoDB: %v", err)
 	}
 
 	err = client.Ping(ctx, nil)
 	if err != nil {
-		log.Fatalf("MongoDB is not available: %v", err)
+		log.Fatalf("MongoDB не доступна: %v", err)
 	}
 
-	fmt.Println("Connected to MongoDB!")
+	fmt.Println("Подключено к MongoDB!")
 
 	collection := client.Database("web").Collection("requests")
 
@@ -106,12 +106,12 @@ func startServer(router http.Handler) {
 
 	corsHandler := c.Handler(router)
 
-	fmt.Printf("The server is running on http://localhost:%d\n", 8000)
-	fmt.Printf("Swagger is running on http://localhost:%d/swagger/index.html\n", 8000)
+	fmt.Printf("Сервер запущен на http://localhost:%d\n", 8000)
+	fmt.Printf("Swagger запущен на http://localhost:%d/swagger/index.html\n", 8000)
 
 	err := http.ListenAndServe(fmt.Sprintf("0.0.0.0:%d", 8000), corsHandler)
 	if err != nil {
-		log.Fatalf("Error when starting the server: %v", err)
+		log.Fatalf("Ошибка сервера: %v", err)
 		return
 	}
 }
